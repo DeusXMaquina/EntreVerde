@@ -1,0 +1,21 @@
+{
+  "Alumno":"Pablitou",
+  "Terapias": [{
+    "id":1,
+    "Terapeuta": "Pablo Lopez",
+    "fechaTerapia": "15/Agosto/2020",
+    "Ejercicios": "pilates",
+    "Comportamiento": "le ha ido bien",
+    "Caballo": "Epona",
+    "Equipo": "de natacion",
+    "Observaciones": "A epona le gusta mucho galopar"
+    }, {
+    "id":1,
+    "Terapeuta": "Regina Martinez",
+    "fechaTerapia": "32/Agosto/2024",
+    "Ejercicios": "Karioke",
+    "Comportamiento": "Anda Chido",
+    "Caballo": "Roach",
+    "Equipo": "de Navidad",
+    "Observaciones": "A Roach le gusta caminar por las montañas"
+}]}
