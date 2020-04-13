@@ -1,0 +1,15 @@
+{
+  "Pacientes": [{
+    "id": 1,
+    "Nombre": "Pablo",
+    "Telefono": "33-15-18-19-19",
+    "fechaNacimiento": "10/Agosto/1990",
+    "fechaInscripcion": "10/Agosto/2019"
+  },
+  {
+    "id": 2,
+    "Nombre": "Regina",
+    "Telefono": "33-16-12-32-24",
+    "fechaNacimiento": "20/Septiembre/1992",
+    "fechaInscripcion": "20/September/2020"
+  }]}
