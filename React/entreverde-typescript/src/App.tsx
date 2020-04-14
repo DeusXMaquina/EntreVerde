@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div>
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-          <a className='navbar-brand' href='/'>EntreVerde</a>
+          <a className='navbar-brand' href='/Home'>EntreVerde</a>
           <ul className='navbar-nav mr-auto'>
               <li className='nav-item active'><a href='/Vista1' className='btn btn-outline-primary'>Vista 1</a></li>
               <li className='nav-item active'><a href='/Vista2' className='btn btn-outline-primary'>Vista 2</a></li>
@@ -29,6 +29,9 @@ function App() {
         </nav>
       </div>
       <Switch>
+        <Route path='/Home'>
+          <h1 className='intro'>Bienvenido</h1>
+        </Route>
         <Route path='/Vista1' component={Vista1}/>
         <Route path='/Vista2' component={Vista2}/>
         <Route path='/Vista3' component={Vista3}/>
