@@ -34,3 +34,19 @@ export interface ITerapeutas {
     Nombre:string,
     Telefono:string
 }
+
+export interface IReporteTerapeuta {
+    Nombre:string,
+    noTerapias:number,
+    terapiasMes:number
+}
+
+export interface IMes {
+  mes:string,
+  noTerapias:number
+}
+
+export interface IEnfermedad {
+  enfermedad:string,
+  totalPacientes:number
+}
