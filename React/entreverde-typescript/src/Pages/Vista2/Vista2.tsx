@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MainTable from '../../Components/MainTable/MainTable'
+import './vista2.css'
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
 
 class Vista2 extends Component <{}, {nombre:string}>{
