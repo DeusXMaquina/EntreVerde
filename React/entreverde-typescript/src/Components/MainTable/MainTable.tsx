@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import './MainTable.css'
-import { IPacientes, IPaciente, ITerapeutas, IAlumno } from './MainTableInterfaces'
+import { IPacientes, IPaciente, ITerapeutas, IAlumno, IReporteTerapeuta, IMes, IEnfermedad } from './MainTableInterfaces'
 import pacientesJSON from '../../JSON Test Files/tabla1.json'
 import pacienteJSON from '../../JSON Test Files/tabla2.json'
 import alumnoJSON from '../../JSON Test Files/tabla3.json'
+import reporteTJSON from '../../JSON Test Files/tabla4.json'
+import reporteCJSON from '../../JSON Test Files/tabla5.json'
+import reporteMJSON from '../../JSON Test Files/tabla6.json'
+import reporteEJSON from '../../JSON Test Files/tabla7.json'
 
 class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:number, alumno?:string}> {
   
-    state: Readonly<{paciente?:IPaciente, pacientes?:IPacientes[], terapeutas?:[ITerapeutas], InfoTerapias?:{alumno:string, terapias:IAlumno[]}}> = {
+    state: Readonly<{paciente?:IPaciente, pacientes?:IPacientes[], terapeutas?:[ITerapeutas], InfoTerapias?:{alumno:string, terapias:IAlumno[]},ReporteTerapeuta?:IReporteTerapeuta, ReporteCaballo?: IReporteTerapeuta, ReporteMes?:IMes, ReporteEnfermedad?:IEnfermedad}> = {
       pacientes: pacientesJSON.Pacientes,
       paciente: pacienteJSON,
       InfoTerapias: {
         alumno: alumnoJSON.Alumno,
         terapias: alumnoJSON.Terapias
-      } 
+      },
+      ReporteTerapeuta: reporteTJSON,
+      ReporteCaballo: reporteCJSON,
+      ReporteMes:reporteMJSON,
+      ReporteEnfermedad:reporteEJSON
     }
 
     render () {
@@ -109,6 +117,78 @@ class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:
               </thead>
               <tbody>
                 {mapTerapias()}
+              </tbody>
+            </table>
+          </div>
+        } else if (this.props.reporte === 2) {
+          return <div className='card'>
+            <table>
+              <thead>
+                <tr>
+                  <th className='card-header'>Nombre</th>
+                  <th className='card-header'>numero de sesiones</th>
+                  <th className='card-header'>Total terapias</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{this.state.ReporteTerapeuta?.Nombre}</td>
+                  <td>{this.state.ReporteTerapeuta?.noTerapias}</td>
+                  <td>{this.state.ReporteTerapeuta?.terapiasMes}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        } else if (this.props.reporte === 3) {
+          return <div className='card'>
+            <table>
+              <thead>
+                <tr>
+                  <th className='card-header'>Nombre</th>
+                  <th className='card-header'>numero de sesiones</th>
+                  <th className='card-header'>Total terapias</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{this.state.ReporteCaballo?.Nombre}</td>
+                  <td>{this.state.ReporteCaballo?.noTerapias}</td>
+                  <td>{this.state.ReporteCaballo?.terapiasMes}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        } else if (this.props.reporte === 4) {
+          return <div className='card'>
+            <table>
+              <thead>
+                <tr>
+                  <th className='card-header'>Mes</th>
+                  <th className='card-header'>Numero de Terapias</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{this.state.ReporteMes?.mes}</td>
+                  <td>{this.state.ReporteMes?.noTerapias}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        } else if (this.props.reporte === 5) {
+          return <div className='card'>
+            <table>
+              <thead>
+                <tr>
+                  <th className='card-header'>Enfermedad</th>
+                  <th className='card-header'>Numero de Pacientes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{this.state.ReporteEnfermedad?.enfermedad}</td>
+                  <td>{this.state.ReporteEnfermedad?.totalPacientes}</td>
+                </tr>
               </tbody>
             </table>
           </div>
