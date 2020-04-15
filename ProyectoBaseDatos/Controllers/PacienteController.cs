@@ -1,9 +1,7 @@
 ﻿using ProyectoBaseDatos.Models;
-using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ProyectoBaseDatos.Controllers
@@ -12,10 +10,13 @@ namespace ProyectoBaseDatos.Controllers
     {
 
         List<Paciente> paciente = new List<Paciente>();
+        private Conexion conexion { get; set; }
 
         public PacienteController()
         {
             //Database call
+            var cadena = ConfigurationManager.ConnectionStrings["EntreVerde"].ConnectionString;
+            conexion = new Conexion(cadena);
         }
         // GET: api/Paciente
         public List<Paciente> Get()
@@ -46,7 +47,7 @@ namespace ProyectoBaseDatos.Controllers
         // DELETE: api/Paciente/5
         public void Delete(int id)
         {
-            
+
         }
     }
 }

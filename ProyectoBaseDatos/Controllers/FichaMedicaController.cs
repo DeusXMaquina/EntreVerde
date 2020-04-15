@@ -1,6 +1,7 @@
 ﻿using ProyectoBaseDatos.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,7 +11,15 @@ namespace ProyectoBaseDatos.Controllers
 {
     public class FichaMedicaController : ApiController
     {
+        private Conexion conexion { get; set; }
         List<FichaMedica> fichaMed = new List<FichaMedica>();
+
+        public FichaMedicaController() 
+        {
+            var cadena = ConfigurationManager.ConnectionStrings["EntreVerde"].ConnectionString;
+            conexion = new Conexion(cadena);
+        }
+
         // GET: api/FichaMedica
         public List<FichaMedica> Get()
         {

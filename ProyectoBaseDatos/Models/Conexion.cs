@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace ProyectoBaseDatos.Conexion
+namespace ProyectoBaseDatos.Models
 {
     public class Conexion
     {
