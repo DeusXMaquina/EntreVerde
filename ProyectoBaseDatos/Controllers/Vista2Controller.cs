@@ -38,7 +38,6 @@ namespace ProyectoBaseDatos.Controllers
             {
                 return vista;
             }
-           
 
             vista.Nombre = datos[0].ToString();
             vista.Telefono = datos[1].ToString();
