@@ -28,7 +28,7 @@ namespace ProyectoBaseDatos.Controllers
         }
 
         // GET: api/Vista2/5
-        public List<Vista2> Get(string texto)
+        public Vista2 Get(string texto)
         {
             string comandoSeleccionar =
                    "dbo.busquedaXNombre";
@@ -40,13 +40,12 @@ namespace ProyectoBaseDatos.Controllers
             //var validar = new Validaciones();
 
             var datos = conexion.LeerProcedimientoAlmacenado(comandoSeleccionar, parametros);
-            var lista = new List<Vista2>();
-
+            var vista = new Vista2();
             if (datos.Count == 0)
             {
-                return lista;
+                return vista;
             }
-            var vista = new Vista2();
+           
 
             vista.Nombre = datos[0].ToString();
             vista.Telefono = datos[1].ToString();
@@ -58,8 +57,7 @@ namespace ProyectoBaseDatos.Controllers
             vista.Medicamentos = datos[7].ToString();
             vista.Observaciones = datos[8].ToString();
 
-            lista.Add(vista);
-            return lista;
+            return vista;
         }
 
         // POST: api/Vista2
