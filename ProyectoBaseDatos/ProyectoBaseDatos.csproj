@@ -155,18 +155,16 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Vista2Controller.cs" />
+    <Compile Include="Controllers\Vista3Controller.cs" />
     <Compile Include="Models\Conexion.cs" />
-    <Compile Include="Controllers\FichaMedicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FichaMedica.cs" />
-    <Compile Include="Models\Paciente.cs" />
-    <Compile Include="Models\Terapeuta.cs" />
-    <Compile Include="Models\Terapia.cs" />
+    <Compile Include="Models\Vista2.cs" />
+    <Compile Include="Models\Vista3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
