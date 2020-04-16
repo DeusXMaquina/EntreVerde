@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './MainTable.css'
-import { IPacientes, IPaciente, ITerapeutas, IAlumno, IReporteTerapeuta, IMes, IEnfermedad } from './MainTableInterfaces'
+import { IPacientes, IPaciente, ITerapeutas, IAlumno, IReporteTerapeuta, IReporteCaballo, IMes, IEnfermedad } from './MainTableInterfaces'
 import pacientesJSON from '../../JSON Test Files/tabla1.json'
 import pacienteJSON from '../../JSON Test Files/tabla2.json'
 import alumnoJSON from '../../JSON Test Files/tabla3.json'
@@ -9,9 +9,9 @@ import reporteCJSON from '../../JSON Test Files/tabla5.json'
 import reporteMJSON from '../../JSON Test Files/tabla6.json'
 import reporteEJSON from '../../JSON Test Files/tabla7.json'
 
-class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:number, alumno?:string}> {
+class MainTable extends Component <{id?:number, terapeuta?:string, reporte?:number, alumnoID?:number}> {
   
-    state: Readonly<{paciente?:IPaciente, pacientes?:IPacientes[], terapeutas?:[ITerapeutas], InfoTerapias?:{alumno:string, terapias:IAlumno[]},ReporteTerapeuta?:IReporteTerapeuta, ReporteCaballo?: IReporteTerapeuta, ReporteMes?:IMes, ReporteEnfermedad?:IEnfermedad}> = {
+    state: Readonly<{paciente?:IPaciente, pacientes?:IPacientes[], terapeutas?:[ITerapeutas], InfoTerapias?:{alumno:string, terapias:IAlumno[]},ReporteTerapeuta?:IReporteTerapeuta, ReporteCaballo?: IReporteCaballo, ReporteMes?:IMes, ReporteEnfermedad?:IEnfermedad}> = {
       pacientes: pacientesJSON.Pacientes,
       paciente: pacienteJSON,
       InfoTerapias: {
@@ -68,7 +68,7 @@ class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:
             </tbody>
           </table>
         </div>
-        } else if(this.props.nombre === 'Pablo') {
+        } else if(this.props.id === 1) {
           return <div className='card'>
             <table>
               <thead>
@@ -101,7 +101,7 @@ class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:
 
           </div>
         }
-        else if (this.props.alumno === 'Lopez') {
+        else if (this.props.alumnoID === 1) {
           return <div className='card'>
             <table>
               <thead>
@@ -128,6 +128,7 @@ class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:
                   <th className='card-header'>Nombre</th>
                   <th className='card-header'>numero de sesiones</th>
                   <th className='card-header'>Total terapias</th>
+                  <th className='card-header'>Mes</th>
                 </tr>
               </thead>
               <tbody>
@@ -135,6 +136,7 @@ class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:
                   <td>{this.state.ReporteTerapeuta?.Nombre}</td>
                   <td>{this.state.ReporteTerapeuta?.noTerapias}</td>
                   <td>{this.state.ReporteTerapeuta?.terapiasMes}</td>
+                  <td>{this.state.ReporteTerapeuta?.Mes}</td>
                 </tr>
               </tbody>
             </table>
@@ -165,12 +167,14 @@ class MainTable extends Component <{nombre?:string, terapeuta?:string, reporte?:
                 <tr>
                   <th className='card-header'>Mes</th>
                   <th className='card-header'>Numero de Terapias</th>
+                  <th className='card-header'>Año</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{this.state.ReporteMes?.mes}</td>
                   <td>{this.state.ReporteMes?.noTerapias}</td>
+                  <td>{this.state.ReporteMes?.Año}</td>
                 </tr>
               </tbody>
             </table>

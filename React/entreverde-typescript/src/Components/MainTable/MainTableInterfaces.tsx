@@ -38,12 +38,20 @@ export interface ITerapeutas {
 export interface IReporteTerapeuta {
     Nombre:string,
     noTerapias:number,
+    terapiasMes:number,
+    Mes:string
+}
+
+export interface IReporteCaballo {
+    Nombre:string,
+    noTerapias:number,
     terapiasMes:number
 }
 
 export interface IMes {
   mes:string,
-  noTerapias:number
+  noTerapias:number,
+  Año:number
 }
 
 export interface IEnfermedad {
