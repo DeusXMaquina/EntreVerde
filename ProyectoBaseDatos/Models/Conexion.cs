@@ -11,9 +11,11 @@ namespace ProyectoBaseDatos.Models
     {
         private SqlConnection Servidor { get; set; }
 
-        public Conexion(string cadena)
+
+        public string connectionString = "";
+        public Conexion()
         {
-            Servidor = new SqlConnection(cadena);
+            Servidor = new SqlConnection(connectionString);
         }
 
         private bool AbrirConexion()
