@@ -3,15 +3,15 @@ import MainTable from '../../Components/MainTable/MainTable'
 import './vista3.css'
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
 
-class Vista3 extends Component <{}, {alumno:string}> {
+class Vista3 extends Component <{}, {alumno:number}> {
   
   state = {
-    alumno: ''
+    alumno: 0
   }
   render () {
       const obtenerAlumno = () => {
         var domElement:any =document.getElementById('nombrePaciente') ? document.getElementById('nombrePaciente') : null
-        this.setState({alumno:domElement.value})
+        this.setState({alumno:Number(domElement.value)})
       }
     return <Router>
          <h4>Por favor ingresa el nombre del paciente que deseas buscar:</h4>
@@ -23,7 +23,7 @@ class Vista3 extends Component <{}, {alumno:string}> {
       </form>
       <Switch>
         <Route path='/info'>
-          <MainTable alumno={this.state.alumno} />
+          <MainTable alumnoID={this.state.alumno} />
         </Route>
       </Switch>
     </Router>

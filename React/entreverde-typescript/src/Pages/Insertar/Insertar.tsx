@@ -26,13 +26,17 @@ class Insertar extends Component {
           <div className='input-group-prepend'>
             <span className='input-group-text'>Fecha de Nacimiento</span>
           </div>
-          <input type='text' aria-label='FechaNacimiento' className='form-control'></input>
+          <input type='text' aria-label='DiaFN' className='form-control' placeholder='Día'></input>
+          <input type='text' aria-label='MesFN' className='form-control' placeholder='Mes'></input>
+          <input type='text' aria-label='AñoFN' className='form-control' placeholder='Año'></input>
         </div>
         <div className='input-group'>
           <div className='input-group-prepend'>
             <span className='input-group-text'>Fecha Inscripcion</span>
           </div>
-          <input type='text' aria-label='FechaInscripcion' className='form-control'></input>
+          <input type='text' aria-label='DiaFI' className='form-control' placeholder='Día'></input>
+          <input type='text' aria-label='MesFI' className='form-control' placeholder='Mes'></input>
+          <input type='text' aria-label='AñoFI' className='form-control' placeholder='Año'></input>
         </div>
         <button type='button' className='btn btn-outline-secondary'>Enviar</button>
       </form>
