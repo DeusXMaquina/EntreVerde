@@ -17,14 +17,7 @@ namespace ProyectoBaseDatos.Controllers
 
         public Vista2Controller()
         {
-            var cadena = ConfigurationManager.ConnectionStrings["EntreVerde"].ConnectionString;
-            conexion = new Conexion(cadena);
-        }
-
-        // GET: api/Vista2
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            conexion = new Conexion();
         }
 
         // GET: api/Vista2/5
@@ -60,21 +53,6 @@ namespace ProyectoBaseDatos.Controllers
 
             lista.Add(vista);
             return lista;
-        }
-
-        // POST: api/Vista2
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Vista2/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Vista2/5
-        public void Delete(int id)
-        {
         }
     }
 }
