@@ -17,8 +17,7 @@ namespace ProyectoBaseDatos.Controllers
 
         public Vista3Controller()
         {
-            var cadena = ConfigurationManager.ConnectionStrings["EntreVerde"].ConnectionString;
-            conexion = new Conexion(cadena);
+            conexion = new Conexion();
         }
         // GET: api/Vista3
         public IEnumerable<string> Get()
@@ -55,21 +54,6 @@ namespace ProyectoBaseDatos.Controllers
 
             lista.Add(vista);
             return lista;
-        }
-
-        // POST: api/Vista3
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Vista3/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Vista3/5
-        public void Delete(int id)
-        {
         }
     }
 }

@@ -26,13 +26,13 @@ end
 Select dbo.Nombre (Nombre,ApellidoPaterno,ApellidoMaterno)as 'Paciente', Telefono,  dbo.convertFecha(FechaNacimiento) as 'Fecha Nacimiento', dbo.convertFecha(FechaInscripcion) as 'Fecha Inscripcion' from Paciente
 
 --2. Búsqueda por Nombre
-create procedure busquedaXNombre (@texto nvarchar(255))
+alter procedure busquedaXNombre (@Id int)
 as
 begin 
 Select  dbo.Nombre(p.Nombre,p.ApellidoPaterno,p.ApellidoMaterno) as 'Paciente', p.Telefono, dbo.convertFecha( p.FechaNacimiento) as 'Fecha Nacimiento', fm.NombreContactoEmergencia, fm.TelefonoContactoEmergencia,
 fm.Alergias, fm.Medicamentos, fm.Enfermedades, fm.Observaciones from FichaMedica fm
 inner join Paciente p on p.IdPaciente = fm.IdPaciente
-where p.Nombre like '%' + @texto +'%' or p.ApellidoPaterno like '%' + @texto +'%' or p.ApellidoMaterno like '%' + @texto +'%'
+where p.IdPaciente = @Id
 end
 
 --3. Terapias por Alumno

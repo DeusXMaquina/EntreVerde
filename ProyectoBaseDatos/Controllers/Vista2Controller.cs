@@ -21,14 +21,14 @@ namespace ProyectoBaseDatos.Controllers
         }
 
         // GET: api/Vista2/5
-        public Vista2 Get(string texto)
+        public Vista2 Get(int id)
         {
             string comandoSeleccionar =
                    "dbo.busquedaXNombre";
 
             SqlParameter[] parametros = new SqlParameter[1]
             {
-                new SqlParameter ("@texto", texto)
+                new SqlParameter ("@Id", id)
             };
             //var validar = new Validaciones();
 

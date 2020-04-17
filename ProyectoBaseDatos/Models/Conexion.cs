@@ -12,7 +12,7 @@ namespace ProyectoBaseDatos.Models
         private SqlConnection Servidor { get; set; }
 
 
-        public string connectionString = "";
+        public string connectionString = "server=RMT; database=EntreVerde; user=univa; password=univa; Trusted_Connection=True;";
         public Conexion()
         {
             Servidor = new SqlConnection(connectionString);
@@ -51,6 +51,17 @@ namespace ProyectoBaseDatos.Models
                 }
             }
             respuesta.Close();
+            CerrarConexion();
+            return info;
+        }
+
+        public DataSet RealizarLectura(string comando)
+        {
+            var info = new DataSet();
+
+            AbrirConexion();
+            var adaptador = new SqlDataAdapter(comando, Servidor);
+            adaptador.Fill(info);
             CerrarConexion();
             return info;
         }
