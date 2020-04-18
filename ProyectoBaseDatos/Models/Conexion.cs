@@ -65,6 +65,5 @@ namespace ProyectoBaseDatos.Models
             CerrarConexion();
             return info;
         }
-
     }
 }
