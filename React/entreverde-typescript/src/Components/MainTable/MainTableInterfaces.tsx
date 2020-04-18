@@ -1,18 +1,17 @@
 export interface IPacientes {
-    id:number,
     Nombre:string,
     Telefono:string,
-    fechaNacimiento:string,
-    fechaInscripcion:string
+    FechaNacimiento:string,
+    FechaInscripcion:string
 }
 
 export interface IPaciente {
     id: number,
     Nombre:string,
     Telefono:string,
-    fechaNacimiento:string,
-    contactoEmergencia:string,
-    telefonoEmergencia:string,
+    FechaNacimiento:string,
+    NombreContactoEmergencia:string,
+    TelefonoContactoEmergencia:string,
     Alergias:string,
     Medicamentos:string,
     Enfermedades:string,
