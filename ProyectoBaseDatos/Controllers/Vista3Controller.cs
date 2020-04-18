@@ -25,15 +25,15 @@ namespace ProyectoBaseDatos.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Vista3/5
-        public List<Vista3> Get(string texto)
+        [Route("api/Vista3/{id:int}")]
+        public List<Vista3> Get(int id)
         {
             string comandoSeleccionar =
                "dbo.terapiaXAlumno";
 
             SqlParameter[] parametros = new SqlParameter[1]
             {
-                new SqlParameter ("@texto", texto)
+                new SqlParameter ("@Id", id)
             };
 
             var datos = conexion.LeerProcedimientoAlmacenado(comandoSeleccionar, parametros);
@@ -45,12 +45,12 @@ namespace ProyectoBaseDatos.Controllers
             }
             var vista = new Vista3();
 
-            vista.Terapeuta = datos[0].ToString();
-            vista.FechaTerapia = datos[1].ToString();
-            vista.Ejercicios = datos[2].ToString();
-            vista.Comportamientos = datos[3].ToString();
-            vista.Caballo = datos[4].ToString();
-            vista.Equipo = datos[5].ToString();
+            vista.Terapeuta = datos[1].ToString();
+            vista.FechaTerapia = datos[2].ToString();
+            vista.Ejercicios = datos[3].ToString();
+            vista.Comportamientos = datos[4].ToString();
+            vista.Caballo = datos[5].ToString();
+            vista.Equipo = datos[6].ToString();
 
             lista.Add(vista);
             return lista;

@@ -20,7 +20,7 @@ namespace ProyectoBaseDatos.Controllers
             conexion = new Conexion();
         }
 
-        // GET: api/Vista1/5
+        [Route("api/Vista1/GetPaciente")]
         public List <Paciente> Get()
         {
             var vista = new Paciente();

@@ -20,7 +20,7 @@ namespace ProyectoBaseDatos.Controllers
             conexion = new Conexion();
         }
 
-        // GET: api/Vista2/5
+        [Route("api/Vista2/Get/{id:int}")]
         public Vista2 Get(int id)
         {
             string comandoSeleccionar =
