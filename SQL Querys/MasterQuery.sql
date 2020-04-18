@@ -1,4 +1,4 @@
-CREATE DATABASE Entreverde
+
 USE Entreverde
 
 ----------------------------------------TABLAS--------------------------------------------------
@@ -44,6 +44,16 @@ CREATE TABLE Terapia (
   Observaciones TEXT NOT NULL
 )
 
+CREATE TABLE [dbo].[HistoricoPaciente](
+	[IdHistorico] [int] IDENTITY(1,1) NOT NULL,
+	[IdPaciente] [int] NOT NULL,
+	[CampoModificado] [nvarchar](50) NOT NULL,
+	[ValoresAntNuev] [text] NOT NULL,
+ CONSTRAINT [PK_HistoricoPaciente] PRIMARY KEY CLUSTERED 
+(
+	[IdHistorico] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 ----------------------------------------INSERTS-------------------------------------------------
 
 INSERT INTO Paciente VALUES ('Pablo','Altamirano','Arce','3315181919','1990-08-10','2020-10-08')
@@ -136,50 +146,90 @@ SELECT dbo.Nombre (Nombre,ApellidoPaterno,ApellidoMaterno) AS 'Paciente', Telefo
 ----------------------------------------PROCEDURES----------------------------------------------
 
 -- VISTA 2-----------------------------------------------
+alter procedure busquedaXNombre (@Id int)
+as
+begin 
+Select  dbo.Nombre(p.Nombre,p.ApellidoPaterno,p.ApellidoMaterno) as 'Paciente', p.Telefono, dbo.convertFecha( p.FechaNacimiento) as 'Fecha Nacimiento', fm.NombreContactoEmergencia, fm.TelefonoContactoEmergencia,
+fm.Alergias, fm.Medicamentos, fm.Enfermedades, fm.Observaciones from FichaMedica fm
+inner join Paciente p on p.IdPaciente = fm.IdPaciente
+where p.IdPaciente = @Id
+end
 
-CREATE PROCEDURE busquedaXNombre (@Id INT)
-AS
-BEGIN 
-SELECT  dbo.Nombre(p.Nombre, p.ApellidoPaterno, p.ApellidoMaterno) AS 'Paciente', p.Telefono, dbo.convertFecha( p.FechaNacimiento) AS 'Fecha Nacimiento', fm.NombreContactoEmergencia, fm.TelefonoContactoEmergencia,
-fm.Alergias, fm.Medicamentos, fm.Enfermedades, fm.Observaciones FROM FichaMedica fm
-INNER JOIN Paciente p ON p.IdPaciente = fm.IdPaciente
-WHERE p.IdPaciente = @Id
-END
+exec busquedaXNombre 2
 
 -- VISTA 3------------------------------------------------
 
-CREATE PROCEDURE terapiaXAlumno (@texto NVARCHAR(255))
-AS
-BEGIN
-SELECT t.IdTerapia, dbo.Nombre(ter.Nombre,ter.ApellidoPaterno, ter.ApellidoMaterno) AS 'Terapeuta', dbo.convertFecha(t.FechaTerapia), t.Ejercicios, t.Comportamientos, t.Caballo, t.Equipo, t.Observaciones FROM Terapia t
-INNER JOIN Terapeuta ter ON ter.IdTerapeuta = t.IdTerapeuta
-INNER JOIN Paciente p ON p.IdPaciente = t.IdPaciente
-WHERE p.Nombre LIKE '%' + @texto +'%' OR p.ApellidoPaterno LIKE '%' + @texto +'%' OR p.ApellidoMaterno LIKE '%' + @texto +'%'
-END
+alter procedure terapiaXAlumno (@Id int)
+as
+begin
+select t.IdTerapia, dbo.Nombre(ter.Nombre,ter.ApellidoPaterno, ter.ApellidoMaterno) as 'Terapeuta', dbo.convertFecha(t.FechaTerapia), t.Ejercicios, t.Comportamientos, t.Caballo, t.Equipo, t.Observaciones from Terapia t
+inner join Terapeuta ter on ter.IdTerapeuta = t.IdTerapeuta
+inner join Paciente p on p.IdPaciente = t.IdPaciente
+where t.IdPaciente = @Id
+end
+
+exec terapiaXAlumno 2
 
 -- VISTA 4------------------------------------------------
 
-SELECT dbo.Nombre(ter.Nombre,ter.ApellidoPaterno,ter.ApellidoMaterno) AS 'Terapeuta'  FROM Terapia t
-INNER JOIN Terapeuta ter ON ter.IdTerapeuta=t.IdTerapeuta
+create procedure TerapeutaporMes (@fecha date)
+as 
+begin
 
+select dbo.Nombre(ter.Nombre,ter.ApellidoPaterno,ter.ApellidoMaterno)as 'Terapeuta', COUNT(t.IdTerapeuta) as 'Sesiones Del Terapeuta', 
+(Select COUNT(IdTerapia) from Terapia where MONTH(FechaTerapia) = MONTH(@fecha)) as 'Total Terapias'  from Terapia t
+inner join Terapeuta ter on ter.IdTerapeuta=t.IdTerapeuta
+where t.IdTerapeuta = (
+ Select TOP 1 IdTerapeuta from Terapia
+where Month (FechaTerapia) = MONTH(@fecha)
+group by IdTerapeuta
+order by Count(IdTerapeuta) desc
+)
+group by ter.Nombre, ter.ApellidoPaterno, ter.ApellidoMaterno
+end
+
+exec TerapeutaporMes '20200213'
 -- VISTA 5------------------------------------------------
 
-CREATE PROCEDURE mejorCaballo
+alter PROCEDURE mejorCaballo
 AS
+begin
 SELECT TOP 1 Caballo, COUNT(Caballo) AS numeroSesiones, (SELECT COUNT(Caballo) FROM Terapia) AS totalTerapias FROM Terapia GROUP BY Caballo ORDER BY numeroSesiones DESC
-
+end
 EXEC mejorCaballo
 
 -- VISTA 6------------------------------------------------
-CREATE PROCEDURE mesTerapia
+alter PROCEDURE mesTerapia
 AS
-SELECT TOP 1 MONTH(FechaTerapia) AS mes , COUNT(MONTH(FechaTerapia)) AS numeroTerapias, YEAR(FechaTerapia) AS Año FROM Terapia GROUP BY FechaTerapia ORDER BY numeroTerapias DESC
+begin
+select Top 1 FORMAT(FechaTerapia, 'MMMM', 'es-MX') as Mes, 
+(
+	Select Count (Month(FechaTerapia)) from Terapia
+	where Month(FechaTerapia) = (Select Top 1 MONTH(FechaTerapia) from Terapia)
+) as NumeroTerapia, 
+YEAR(FechaTerapia) as Año
+from Terapia
+group by FechaTerapia
+order by NumeroTerapia desc
+end
 
 EXEC mesTerapia
+
 -- VISTA 7------------------------------------------------
 
-CREATE PROCEDURE enfermedadComun
+create PROCEDURE enfermedadComun
 AS
-SELECT TOP 1 Enfermedades, COUNT(Enfermedades) AS numeroPacientes FROM FichaMedica GROUP BY Enfermedades ORDER BY numeroPacientes DESC
+begin 
+Declare @enfermedad nvarchar(255)
+Select @enfermedad = (Select top 1 CONVERT(nvarchar (255), Enfermedades) from FichaMedica)
+Select top 1 Enfermedades, (Select Count(IdFichaMedica) from FichaMedica where Convert(nvarchar(255),Enfermedades) = @enfermedad) as NumeroPacientes from FichaMedica
+end
 
-EXEC enfermedadComun
+exec enfermedadComun
+
+--------TRIGGER-----------------
+
+---IdPaciente, Nombre del Campo que se modifico, valor anterio y valor nuevo con comas
+
+
+Select*From HistoricoPaciente
