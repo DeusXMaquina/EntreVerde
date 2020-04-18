@@ -47,11 +47,29 @@ namespace ProyectoBaseDatos.Controllers
         }
 
 
-        // PUT: api/Vista1/5
-        public void Put(int id, [FromBody]string value)
+   
+        public void POST([FromBody] PacienteInsertar paciente)
         {
+            DateTime fecha = new DateTime(paciente.Anio, paciente.mes,paciente.dia);
+
+            string comandoInsertar = "INSERT INTO [dbo].[Paciente] " +
+            "(Nombre,ApellidoPaterno,ApellidoMaterno,Telefono,FechaNacimiento,FechaInscripcion)" +
+             "VALUES" +
+            "(@Nombre, @ApellidoPaterno, @ApellidoMaterno, @Telefono, @FechaNacimiento, GETDATE())";
+
+            SqlParameter[] parametros = new SqlParameter[5]
+            {
+                new SqlParameter ("Nombre", paciente.Nombre),
+                new SqlParameter ("ApellidoPaterno", paciente.ApellidoPaterno),
+                new SqlParameter ("ApellidoMaterno", paciente.ApellidoMaterno),
+                new SqlParameter ("Telefono", paciente.Telefono),
+                new SqlParameter ("FechaNacimiento", fecha)
+            };
+
+            conexion.EjecutarComando(comandoInsertar, parametros);
 
         }
-
     }
 }
+
+//string Nombre, string ApellidoPaterno, string ApellidoMaterno, string telefono, int anio, int mes, int dia

@@ -65,5 +65,23 @@ namespace ProyectoBaseDatos.Models
             CerrarConexion();
             return info;
         }
+
+        public bool EjecutarComando(string comando, SqlParameter[] parametros)
+        {
+            SqlCommand comandoSQL = new SqlCommand();
+            comandoSQL.CommandType = CommandType.Text;
+            comandoSQL.CommandText = comando;
+            comandoSQL.Parameters.AddRange(parametros);
+
+            AbrirConexion();
+
+            comandoSQL.Connection = Servidor;
+
+            var resultado = comandoSQL.ExecuteNonQuery();
+
+            CerrarConexion();
+
+            return resultado > 0;
+        }
     }
 }
