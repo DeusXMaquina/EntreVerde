@@ -23,7 +23,7 @@ namespace ProyectoBaseDatos.Controllers
         [Route("api/Vista1/GetPaciente")]
         public List <Paciente> Get()
         {
-            var vista = new Paciente();
+            
 
             string comandoSeleccionar =
                    "Select dbo.Nombre (Nombre,ApellidoPaterno,ApellidoMaterno)as 'Paciente', Telefono,  dbo.convertFecha(FechaNacimiento) as 'Fecha Nacimiento', dbo.convertFecha(FechaInscripcion) as 'Fecha Inscripcion' from Paciente";
@@ -37,6 +37,7 @@ namespace ProyectoBaseDatos.Controllers
 
             foreach (DataRow renglon in datos.Tables[0].Rows)
             { 
+                var vista = new Paciente();
                 vista.Nombre = renglon[0].ToString();
                 vista.Telefono = renglon[1].ToString();
                 vista.FechaNacimiento = renglon[2].ToString();
