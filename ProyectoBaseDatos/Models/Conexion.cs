@@ -12,7 +12,7 @@ namespace ProyectoBaseDatos.Models
         private SqlConnection Servidor { get; set; }
 
 
-        public string connectionString = "server=RMT; database=EntreVerde; user=univa; password=univa; Trusted_Connection=True;";
+        public string connectionString = "Data Source=DESKTOP-6BJQUEF;Database=Entreverde;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Conexion()
         {
             Servidor = new SqlConnection(connectionString);

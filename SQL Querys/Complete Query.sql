@@ -214,5 +214,4 @@ EXEC enfermedadComun
 
 ---IdPaciente, Nombre del Campo que se modifico, valor anterio y valor nuevo con comas
 
-
 Select*From HistoricoPaciente

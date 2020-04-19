@@ -35,25 +35,33 @@ export interface ITerapeutas {
 }
 
 export interface IReporteTerapeuta {
-    Nombre:string,
-    noTerapias:number,
-    terapiasMes:number,
-    Mes:string
+    Terapeuta:string,
+    Sesiones:number,
+    TotalTerapias:number
 }
 
 export interface IReporteCaballo {
-    Nombre:string,
-    noTerapias:number,
-    terapiasMes:number
+    Caballo:string,
+    Sesiones:number,
+    Terapias:number
 }
 
 export interface IMes {
-  mes:string,
-  noTerapias:number,
+  Mes:string,
+  Terapias:number,
   Año:number
 }
 
 export interface IEnfermedad {
-  enfermedad:string,
-  totalPacientes:number
+  Enfermedad:string,
+  NumeroPacientes:number
+}
+
+export interface IInfoTerapias {
+  Terapeuta:string,
+  FechaTerapia:string,
+  Ejercicios:string,
+  Comportamientos:string,
+  Caballo:string,
+  Equipo:string
 }

@@ -23,7 +23,7 @@ class Vista3 extends Component <{}, {alumno:number}> {
       </form>
       <Switch>
         <Route path='/info'>
-          <MainTable alumnoID={this.state.alumno} />
+          <MainTable alumnoID={this.state.alumno}  id={2}/>
         </Route>
       </Switch>
     </Router>

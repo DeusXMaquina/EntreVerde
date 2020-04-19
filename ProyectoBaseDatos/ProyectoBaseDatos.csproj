@@ -54,6 +54,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -158,6 +161,10 @@
     <Compile Include="Controllers\Vista1Controller.cs" />
     <Compile Include="Controllers\Vista2Controller.cs" />
     <Compile Include="Controllers\Vista3Controller.cs" />
+    <Compile Include="Controllers\Vista4Controller.cs" />
+    <Compile Include="Controllers\Vista5Controller.cs" />
+    <Compile Include="Controllers\Vista6Controller.cs" />
+    <Compile Include="Controllers\Vista7Controller.cs" />
     <Compile Include="Models\Conexion.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -165,8 +172,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Paciente.cs" />
+    <Compile Include="Models\PacienteInsertar.cs" />
     <Compile Include="Models\Vista2.cs" />
     <Compile Include="Models\Vista3.cs" />
+    <Compile Include="Models\Vista4.cs" />
+    <Compile Include="Models\Vista5.cs" />
+    <Compile Include="Models\Vista6.cs" />
+	<Compile Include="Models\Vista7.cs" />
+	<Compile Include="Models\Fila.cs" />
+	
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

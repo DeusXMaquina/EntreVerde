@@ -49,7 +49,7 @@ namespace ProyectoBaseDatos.Controllers
             vista.TelefonoContactoEmergencia = columna[4];
             vista.Alergias = columna[5];
             vista.Medicamentos = columna[6];
-            vista.Medicamentos = columna[7];
+            vista.Enfermedades = columna[7];
             vista.Observaciones = columna[8];
 
             return vista;
