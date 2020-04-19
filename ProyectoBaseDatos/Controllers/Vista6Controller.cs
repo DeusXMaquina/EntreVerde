@@ -34,10 +34,12 @@ namespace ProyectoBaseDatos.Controllers
             {
                 return vista;
             }
+            
+            var columna = datos[0].Columnas;
 
-            vista.Mes = datos[0].ToString();
-            vista.Terapias = Int32.Parse(datos[1]);
-            vista.Año = Int32.Parse(datos[2]);
+            vista.Mes = columna[0];
+            vista.Terapias = Int32.Parse(columna[1]);
+            vista.Año = Int32.Parse(columna[2]);
 
             return vista;
         }

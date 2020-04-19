@@ -20,10 +20,6 @@ namespace ProyectoBaseDatos.Controllers
             conexion = new Conexion();
         }
         // GET: api/Vista3
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         [Route("api/Vista3/{id:int}")]
         public List<Vista3> Get(int id)
@@ -43,16 +39,22 @@ namespace ProyectoBaseDatos.Controllers
             {
                 return lista;
             }
-            var vista = new Vista3();
 
-            vista.Terapeuta = datos[1].ToString();
-            vista.FechaTerapia = datos[2].ToString();
-            vista.Ejercicios = datos[3].ToString();
-            vista.Comportamientos = datos[4].ToString();
-            vista.Caballo = datos[5].ToString();
-            vista.Equipo = datos[6].ToString();
+            for (int i = 0; i < datos.Count; i++)
+            {
+                var vista = new Vista3();
 
-            lista.Add(vista);
+                var columnas = datos[i].Columnas;
+
+                vista.Terapeuta = columnas[1];
+                vista.FechaTerapia = columnas[2];
+                vista.Ejercicios = columnas[3];
+                vista.Comportamientos = columnas[4];
+                vista.Caballo = columnas[5];
+                vista.Equipo = columnas[6];
+
+                lista.Add(vista);
+            }
             return lista;
         }
     }

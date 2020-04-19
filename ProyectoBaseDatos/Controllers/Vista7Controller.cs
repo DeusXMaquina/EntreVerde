@@ -18,8 +18,8 @@ namespace ProyectoBaseDatos.Controllers
         {
             conexion = new Conexion();
         }
-            // GET: api/Vista7
-            public Vista7 Get()
+        // GET: api/Vista7
+        public Vista7 Get()
         {
             string comandoSeleccionar =
             "dbo.enfermedadComun";
@@ -34,8 +34,10 @@ namespace ProyectoBaseDatos.Controllers
                 return vista;
             }
 
-            vista.Enfermedad = datos[0].ToString();
-            vista.NumeroPacientes = Int32.Parse(datos[1]);
+            var columna = datos[0].Columnas;
+
+            vista.Enfermedad = columna[0];
+            vista.NumeroPacientes = Int32.Parse(columna[1]);
 
             return vista;
         }

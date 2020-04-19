@@ -38,16 +38,17 @@ namespace ProyectoBaseDatos.Controllers
             {
                 return vista;
             }
+            var columna = datos[0].Columnas;
 
-            vista.Nombre = datos[0].ToString();
-            vista.Telefono = datos[1].ToString();
-            vista.FechaNacimiento = datos[2].ToString();
-            vista.NombreContactoEmergencia = datos[3].ToString();
-            vista.TelefonoContactoEmergencia = datos[4].ToString();
-            vista.Alergias = datos[5].ToString();
-            vista.Medicamentos = datos[6].ToString();
-            vista.Medicamentos = datos[7].ToString();
-            vista.Observaciones = datos[8].ToString();
+            vista.Nombre = columna[0];
+            vista.Telefono = columna[1];
+            vista.FechaNacimiento = columna[2];
+            vista.NombreContactoEmergencia = columna[3];
+            vista.TelefonoContactoEmergencia = columna[4];
+            vista.Alergias = columna[5];
+            vista.Medicamentos = columna[6];
+            vista.Medicamentos = columna[7];
+            vista.Observaciones = columna[8];
 
             return vista;
         }

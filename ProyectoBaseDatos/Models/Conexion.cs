@@ -30,7 +30,7 @@ namespace ProyectoBaseDatos.Models
             return Servidor.State == ConnectionState.Closed;
         }
 
-        public List<String> LeerProcedimientoAlmacenado(string comando, SqlParameter[] parametros)
+        public List<Fila> LeerProcedimientoAlmacenado(string comando, SqlParameter[] parametros)
         {
             SqlCommand comandoSQL = new SqlCommand();
 
@@ -40,15 +40,20 @@ namespace ProyectoBaseDatos.Models
 
             AbrirConexion();
             comandoSQL.Connection = Servidor;
-            var info = new List<string>();
+            var info = new List<Fila>();
 
             var respuesta = comandoSQL.ExecuteReader();
             while (respuesta.Read())
             {
+                Fila fila = new Fila();
+
                 for (int i = 0; i <= respuesta.FieldCount - 1; i++)
                 {
-                    info.Add(respuesta[i].ToString());
+                    fila.Columnas.Add(respuesta[i].ToString());
+                    
                 }
+
+                info.Add(fila);
             }
             respuesta.Close();
             CerrarConexion();
