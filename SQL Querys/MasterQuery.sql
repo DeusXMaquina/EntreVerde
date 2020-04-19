@@ -205,12 +205,12 @@ begin
 select Top 1 FORMAT(FechaTerapia, 'MMMM', 'es-MX') as Mes, 
 (
 	Select Count (Month(FechaTerapia)) from Terapia
-	where Month(FechaTerapia) = (Select Top 1 MONTH(FechaTerapia) from Terapia)
+	where Month(FechaTerapia) = (Select Top 1 MONTH(FechaTerapia) from Terapia) and YEAR(FechaTerapia) = YEAR(GETDATE())
 ) as NumeroTerapia, 
 YEAR(FechaTerapia) as Año
 from Terapia
+where YEAR(FechaTerapia) = YEAR(GETDATE())
 group by FechaTerapia
-order by NumeroTerapia desc
 end
 
 EXEC mesTerapia
@@ -231,5 +231,31 @@ exec enfermedadComun
 
 ---IdPaciente, Nombre del Campo que se modifico, valor anterio y valor nuevo con comas
 
+create trigger InsertarProd
+on Paciente
+after insert
+as
+begin
+	insert into HistoricoPaciente 
+	select IdPaciente, 'Nombre', 'NULL, ' + Nombre from inserted
+	
+	insert into HistoricoPaciente 
+	select IdPaciente, 'ApellidoPaterno', 'NULL, ' + ApellidoPaterno from inserted
+	
+	insert into HistoricoPaciente 
+	select IdPaciente, 'ApellidoMaterno', 'NULL, ' + ApellidoMaterno from inserted
+	
+	insert into HistoricoPaciente 
+	select IdPaciente, 'Telefono', 'NULL, ' + Telefono from inserted
+
+	insert into HistoricoPaciente 
+	select IdPaciente, 'FechaNacimiento', 'NULL, ' + CONVERT(nvarchar(255),FechaNacimiento) from inserted
+	
+	insert into HistoricoPaciente 
+	select IdPaciente, 'FechaInscripcion', 'NULL, ' + CONVERT(nvarchar(255),FechaNacimiento) from inserted
+end
+
+Insert into Paciente values ('Mariana','Picasso','Lujan','3336728989','20010418',GETDATE())
 
 Select*From HistoricoPaciente
+Select*from Paciente
