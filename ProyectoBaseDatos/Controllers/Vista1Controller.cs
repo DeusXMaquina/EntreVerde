@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+
 
 namespace ProyectoBaseDatos.Controllers
 {
@@ -47,9 +45,9 @@ namespace ProyectoBaseDatos.Controllers
             return lista;
         }
 
-
-   
-        public void POST([FromBody] PacienteInsertar paciente)
+        [Route("api/Vista1/PostPaciente")]
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] PacienteInsertar paciente)
         {
             DateTime fecha = new DateTime(paciente.Anio, paciente.mes,paciente.dia);
 
@@ -60,15 +58,16 @@ namespace ProyectoBaseDatos.Controllers
 
             SqlParameter[] parametros = new SqlParameter[5]
             {
-                new SqlParameter ("Nombre", paciente.Nombre),
-                new SqlParameter ("ApellidoPaterno", paciente.ApellidoPaterno),
-                new SqlParameter ("ApellidoMaterno", paciente.ApellidoMaterno),
-                new SqlParameter ("Telefono", paciente.Telefono),
-                new SqlParameter ("FechaNacimiento", fecha)
+                new SqlParameter ("@Nombre", paciente.Nombre),
+                new SqlParameter ("@ApellidoPaterno", paciente.ApellidoPaterno),
+                new SqlParameter ("@ApellidoMaterno", paciente.ApellidoMaterno),
+                new SqlParameter ("@Telefono", paciente.Telefono),
+                new SqlParameter ("@FechaNacimiento", fecha)
             };
 
             conexion.EjecutarComando(comandoInsertar, parametros);
 
+            return Ok();
         }
     }
 }

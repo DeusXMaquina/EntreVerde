@@ -40,9 +40,11 @@ namespace ProyectoBaseDatos.Controllers
                 return vista;
             }
 
-            vista.Terapeuta = datos[0].ToString();
-            vista.Sesiones = Int32.Parse(datos[1]);
-            vista.TotalTerapias = Int32.Parse(datos[2]);
+            var columna = datos[0].Columnas; 
+
+            vista.Terapeuta = columna[0];
+            vista.Sesiones = Int32.Parse(columna[1]);
+            vista.TotalTerapias = Int32.Parse(columna[2]);
 
             return vista;
         }
