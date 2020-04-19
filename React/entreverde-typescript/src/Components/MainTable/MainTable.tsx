@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './MainTable.css'
 import { IPacientes, IPaciente, ITerapeutas, IAlumno, IReporteTerapeuta, IReporteCaballo, IMes, IEnfermedad } from './MainTableInterfaces'
-import pacientesJSON from '../../JSON Test Files/tabla1.json'
+//import pacientesJSON from '../../JSON Test Files/tabla1.json'
 import pacienteJSON from '../../JSON Test Files/tabla2.json'
 import alumnoJSON from '../../JSON Test Files/tabla3.json'
 import reporteTJSON from '../../JSON Test Files/tabla4.json'
@@ -9,11 +9,9 @@ import reporteCJSON from '../../JSON Test Files/tabla5.json'
 import reporteMJSON from '../../JSON Test Files/tabla6.json'
 import reporteEJSON from '../../JSON Test Files/tabla7.json'
 
-class MainTable extends Component <{id?:number, terapeuta?:string, reporte?:number, alumnoID?:number}> {
+class MainTable extends Component <{id?:number, terapeuta?:string, reporte?:number, alumnoID?:number, fecha?:string, idPaciente?:number}> {
   
     state: Readonly<{paciente?:IPaciente, pacientes?:IPacientes[], terapeutas?:[ITerapeutas], InfoTerapias?:{alumno:string, terapias:IAlumno[]},ReporteTerapeuta?:IReporteTerapeuta, ReporteCaballo?: IReporteCaballo, ReporteMes?:IMes, ReporteEnfermedad?:IEnfermedad}> = {
-      pacientes: pacientesJSON.Pacientes,
-      paciente: pacienteJSON,
       InfoTerapias: {
         alumno: alumnoJSON.Alumno,
         terapias: alumnoJSON.Terapias
@@ -24,6 +22,19 @@ class MainTable extends Component <{id?:number, terapeuta?:string, reporte?:numb
       ReporteEnfermedad:reporteEJSON
     }
 
+    componentWillMount() {
+      if (this.props.reporte ===1 ){
+        fetch('https://localhost:44333/api/Vista1/GetPaciente')
+        .then(res => res.json())
+        .then(data => {this.setState({pacientes:data})})
+      }
+      if (this.props.idPaciente !== 0 ) {
+        fetch(`https://localhost:44333/api/Vista2/Get/${this.props.id}`)
+        .then(res => res.json())
+        .then (data => {this.setState({paciente:data})})
+      }
+    }
+
     render () {
       const mapPaciente = () => {
         if (this.state.pacientes !== undefined)
@@ -31,8 +42,8 @@ class MainTable extends Component <{id?:number, terapeuta?:string, reporte?:numb
             return <tr key={index}>
               <td >{paciente.Nombre}</td>
               <td >{paciente.Telefono}</td>
-              <td >{paciente.fechaNacimiento}</td>
-              <td >{paciente.fechaInscripcion}</td>
+              <td >{paciente.FechaNacimiento}</td>
+              <td >{paciente.FechaInscripcion}</td>
             </tr>
           })
       }
@@ -88,9 +99,9 @@ class MainTable extends Component <{id?:number, terapeuta?:string, reporte?:numb
                 <tr>
                   <td>{this.state.paciente?.Nombre}</td>
                   <td>{this.state.paciente?.Telefono}</td>
-                  <td>{this.state.paciente?.fechaNacimiento}</td>
-                  <td>{this.state.paciente?.contactoEmergencia}</td>
-                  <td>{this.state.paciente?.telefonoEmergencia}</td>
+                  <td>{this.state.paciente?.FechaNacimiento}</td>
+                  <td>{this.state.paciente?.NombreContactoEmergencia}</td>
+                  <td>{this.state.paciente?.TelefonoContactoEmergencia}</td>
                   <td>{this.state.paciente?.Alergias}</td>
                   <td>{this.state.paciente?.Medicamentos}</td>
                   <td>{this.state.paciente?.Enfermedades}</td>

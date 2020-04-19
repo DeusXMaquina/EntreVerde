@@ -23,7 +23,7 @@ class Vista2 extends Component <{}, {id:number}>{
       </form>
       <Switch>
         <Route path='/info'>
-          <MainTable id={this.state.id} />
+          <MainTable idPaciente={this.state.id} id={1} />
         </Route>
       </Switch>
     </Router>
