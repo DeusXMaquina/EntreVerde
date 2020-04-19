@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 
 namespace ProyectoBaseDatos.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class Vista1Controller : ApiController
     {
         private Conexion conexion { get; set; }
@@ -21,8 +22,6 @@ namespace ProyectoBaseDatos.Controllers
         [Route("api/Vista1/GetPaciente")]
         public List <Paciente> Get()
         {
-            
-
             string comandoSeleccionar =
                    "Select dbo.Nombre (Nombre,ApellidoPaterno,ApellidoMaterno)as 'Paciente', Telefono,  dbo.convertFecha(FechaNacimiento) as 'Fecha Nacimiento', dbo.convertFecha(FechaInscripcion) as 'Fecha Inscripcion' from Paciente";
 
@@ -43,31 +42,6 @@ namespace ProyectoBaseDatos.Controllers
                 lista.Add(vista);
             }
             return lista;
-        }
-
-        [Route("api/Vista1/PostPaciente")]
-        [HttpPost]
-        public IHttpActionResult Post([FromBody] PacienteInsertar paciente)
-        {
-            DateTime fecha = new DateTime(paciente.Anio, paciente.mes,paciente.dia);
-
-            string comandoInsertar = "INSERT INTO [dbo].[Paciente] " +
-            "(Nombre,ApellidoPaterno,ApellidoMaterno,Telefono,FechaNacimiento,FechaInscripcion)" +
-             "VALUES" +
-            "(@Nombre, @ApellidoPaterno, @ApellidoMaterno, @Telefono, @FechaNacimiento, GETDATE())";
-
-            SqlParameter[] parametros = new SqlParameter[5]
-            {
-                new SqlParameter ("@Nombre", paciente.Nombre),
-                new SqlParameter ("@ApellidoPaterno", paciente.ApellidoPaterno),
-                new SqlParameter ("@ApellidoMaterno", paciente.ApellidoMaterno),
-                new SqlParameter ("@Telefono", paciente.Telefono),
-                new SqlParameter ("@FechaNacimiento", fecha)
-            };
-
-            conexion.EjecutarComando(comandoInsertar, parametros);
-
-            return Ok();
         }
     }
 }

@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ProyectoBaseDatos.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class Vista2Controller : ApiController
     {
         private Conexion conexion { get; set; }
