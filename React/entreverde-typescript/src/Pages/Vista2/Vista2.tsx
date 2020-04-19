@@ -3,27 +3,27 @@ import MainTable from '../../Components/MainTable/MainTable'
 import './vista2.css'
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
 
-class Vista2 extends Component <{}, {nombre:string}>{
+class Vista2 extends Component <{}, {id:number}>{
 
   state= {
-    nombre: ''
+    id: 0
   }
   render() {
-    const obtenerNombre = () => {
-      var domElement:any =document.getElementById('nombrePaciente') ? document.getElementById('nombrePaciente') : null
-      this.setState({nombre:domElement.value})
+    const obtenerID = () => {
+      var domElement:any =document.getElementById('idPaciente') ? document.getElementById('idPaciente') : null
+      this.setState({id:Number(domElement.value)})
     }
     return <Router>
       <h4>Por favor ingresa el nombre del paciente que deseas buscar:</h4>
       <form>
         <div className='form-now col'>
-          <input id='nombrePaciente' type='text' className='form-control' placeholder='Nombre'></input>
+          <input id='idPaciente' type='text' className='form-control' placeholder='Nombre'></input>
         </div>
-        <Link className='btn btn-outline-primary lg-btn' type='button' onClick={obtenerNombre} to='/info'>Buscar</Link>
+        <Link className='btn btn-outline-primary lg-btn' type='button' onClick={obtenerID} to='/info'>Buscar</Link>
       </form>
       <Switch>
         <Route path='/info'>
-          <MainTable nombre={this.state.nombre} />
+          <MainTable idPaciente={this.state.id} id={1} />
         </Route>
       </Switch>
     </Router>

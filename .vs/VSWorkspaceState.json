@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ProyectoBaseDatos",
+    "\\ProyectoBaseDatos\\Models",
+    "\\SQL Querys"
   ],
   "PreviewInSolutionExplorer": false
 }
