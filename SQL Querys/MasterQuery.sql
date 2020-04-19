@@ -1,5 +1,4 @@
 
-USE Entreverde
 
 ----------------------------------------TABLAS--------------------------------------------------
 CREATE TABLE Paciente (
@@ -159,7 +158,7 @@ exec busquedaXNombre 2
 
 -- VISTA 3------------------------------------------------
 
-alter procedure terapiaXAlumno (@Id int)
+create procedure terapiaXAlumno (@Id int)
 as
 begin
 select t.IdTerapia, dbo.Nombre(ter.Nombre,ter.ApellidoPaterno, ter.ApellidoMaterno) as 'Terapeuta', dbo.convertFecha(t.FechaTerapia), t.Ejercicios, t.Comportamientos, t.Caballo, t.Equipo, t.Observaciones from Terapia t
@@ -167,6 +166,7 @@ inner join Terapeuta ter on ter.IdTerapeuta = t.IdTerapeuta
 inner join Paciente p on p.IdPaciente = t.IdPaciente
 where t.IdPaciente = @Id
 end
+
 
 exec terapiaXAlumno 2
 
